@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SSH, Claves Públicas/Privadas y Criptografía Simétrica/Asimétrica</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #4976FF;
+      font-family: Arial, sans-serif;
+    }
+    
+    h1 {
+      font-size: 32px;
+      animation: neon 1s infinite;
+    }
+    
+    h2 {
+      font-size: 24px;
+    }
+    
+    p {
+      font-size: 18px;
+    }
+    
+    .highlight {
+      color: lightblue;
+    }
+    
+    .section {
+      margin: 20px;
+    }
+    
+    .container {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .left, .right {
+      width: 45%;
+    }
+    
+    @keyframes neon {
+      0% { text-shadow: 0 0 5px #4976FF, 0 0 10px #4976FF; }
+      50% { text-shadow: 0 0 20px #4976FF, 0 0 30px #4976FF; }
+      100% { text-shadow: 0 0 5px #4976FF, 0 0 10px #4976FF; }
+    }
+    
+    .animated-title {
+      animation: neon 1s infinite;
+    }
+    
+    .matrix-effect {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background: black;
+      opacity: 0.3;
+    }
+    
+    .matrix-effect:before {
+      content: "";
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 2px;
+      background: #0F0;
+      animation: matrix-scroll 2s linear infinite;
+    }
+    
+    @keyframes matrix-scroll {
+      0% {
+        transform: translateX(-50%) translateY(-10%);
+      }
+      100% {
+        transform: translateX(-50%) translateY(100%);
+      }
+    }
+    
+    .hackers-img {
+      max-width: 100%;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="matrix-effect"></div>
+  <div class="section">
+    <h1 class="animated-title">SSH, Claves Públicas/Privadas y Criptografía Simétrica/Asimétrica</h1>
+  </div>
+
+  <div class="section">
+    <h1 class="highlight">Introducción</h1>
+    <p>En esta guía, exploraremos los conceptos fundamentales de SSH, claves públicas/privadas y criptografía simétrica/asimétrica. Estos conceptos son fundamentales para comprender cómo se establece una conexión segura entre un cliente y un servidor utilizando SSH. Aprenderemos cómo funcionan, sus diferencias y su aplicación en la seguridad de las comunicaciones.</p>
+  </div>
+
+  <div class="section">
+    <h1 class="highlight">SSH (Secure Shell)</h1>
+    <p>SSH (Secure Shell) es un protocolo utilizado para establecer conexiones seguras y administrar sistemas remotos de forma segura. Proporciona autenticación y cifrado de extremo a extremo para proteger la confidencialidad e integridad de los datos transmitidos.</p>
+  </div>
+
+  <div class="section">
+    <h1 class="highlight">Claves Públicas/Privadas</h1>
+    <div class="container">
+      <div class="left">
+        <h2>Clave Pública</h2>
+        <p>Cada usuario genera un par de claves: una clave pública y una clave privada. La clave pública se comparte con el servidor remoto y se utiliza para cifrar los datos que se envían al cliente.</p>
+      </div>
+      <div class="right">
+        <h2>Clave Privada</h2>
+        <p>La clave privada se mantiene en secreto y nunca se comparte. Se utiliza para descifrar los datos cifrados con la clave pública correspondiente.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h1 class="highlight">Criptografía Simétrica y Asimétrica</h1>
+    <div class="container">
+      <div class="left">
+        <h2>Criptografía Simétrica</h2>
+        <p>Utiliza una clave secreta compartida entre el cliente y el servidor para cifrar y descifrar los datos. Es rápido y eficiente en el cifrado, pero requiere un intercambio seguro de la clave inicialmente.</p>
+      </div>
+      <div class="right">
+        <h2>Criptografía Asimétrica</h2>
+        <p>Utiliza un par de claves matemáticamente relacionadas: una clave pública y una clave privada. La clave pública se comparte, mientras que la clave privada se mantiene en secreto. Proporciona autenticación y seguridad sin compartir la clave privada, pero es más lento en el cifrado y descifrado.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h1 class="highlight">Conexión SSH Cliente-Servidor</h1>
+    <ul>
+      <li>El cliente inicia una conexión SSH con el servidor.</li>
+      <li>El servidor responde con su clave pública.</li>
+      <li>El cliente utiliza la clave pública del servidor para cifrar una clave de sesión simétrica y la envía al servidor.</li>
+      <li>El servidor utiliza su clave privada para descifrar la clave de sesión simétrica enviada por el cliente.</li>
+      <li>Se genera una clave de sesión simétrica idéntica tanto en el cliente como en el servidor y se utiliza para cifrar y descifrar los datos durante la sesión.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h1 class="highlight">Datos Curiosos</h1>
+    <ul>
+      <li>SSH fue desarrollado por Tatu Ylönen como respuesta a un intento de intrusión en su servidor a través de una conexión insegura.</li>
+     <li>El cifrado simétrico más comúnmente utilizado en SSH es AES (Advanced Encryption Standard), mientras que el cifrado asimétrico se basa en RSA o ECC (Elliptic Curve Cryptography).</li>
+      <li>La longitud de la clave en SSH tiene un impacto en la seguridad. Claves más largas proporcionan una mayor resistencia frente a ataques de fuerza bruta.</li>
+      <li>SSH es ampliamente utilizado en entornos de administración de sistemas remotos, transferencia de archivos segura (SFTP) y túneles VPN seguros.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h1 class="highlight">Conclusiones</h1>
+    <p>SSH, las claves públicas/privadas y la criptografía simétrica/asimétrica son componentes fundamentales para establecer conexiones seguras y proteger la confidencialidad de los datos en entornos de red. Comprender estos conceptos nos permite administrar sistemas de manera segura y proteger la integridad de la información transmitida.</p>
+    <p>En esta guía, hemos explorado los fundamentos de SSH y su funcionamiento, así como la diferencia entre claves públicas/privadas y criptografía simétrica/asimétrica. Esperamos que esta información te haya sido útil y te ayude en tu presentación.</p>
+    <p>¡Buena suerte con tu exposición sobre SSH y disfruta del aprendizaje!</p>
+  </div>
+
+  <img class="hackers-img" src="hackers.jpg" alt="Hackers Image">
+</body>
+</html>
